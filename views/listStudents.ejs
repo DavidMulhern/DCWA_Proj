@@ -1,0 +1,45 @@
+<style>
+    table, th, td
+    {
+        border:1px solid black;
+        
+    }
+    tr:nth-child(even)
+    {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<h2>Students</h2>
+
+<form action="/addStudent">
+    <input type="submit" value="Add Student">
+</form>
+
+<table>
+    <tr>
+        <th>Student ID</th>
+        <th>Name</th>
+        <th>GPA</th>
+        <th>Action</th>
+    </tr>
+    <!-- All appropriate variables passed for the students and also a link to delete -->
+    <% details.forEach((studInfo)=>
+        { %>
+        <tr>
+            <td>
+                <%= studInfo.sid %>
+            </td>
+            <td>
+                <%= studInfo.name %>
+            </td>
+            <td>
+                <%= studInfo.gpa %>
+            </td>
+            <td>
+                <a href="/student/delete/<%= studInfo.sid %>">Delete</a>
+            </td>
+        </tr>
+        <% }) %>
+</table>
+<a href="/">Home</a>

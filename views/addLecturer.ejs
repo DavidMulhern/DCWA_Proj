@@ -1,0 +1,36 @@
+<html>
+
+<body>
+
+    <h2>Add Lecturer</h2>
+
+    <!-- This will print errors to screen if errors are detected-->
+    <% if (errors != undefined) { %>
+        <ul>
+            <% errors.forEach((error)=> { %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+
+    <!-- Made a second error display, if the express-validator check comes back clean, this one will display if entry already exists-->
+    <% if (errorsTwo != undefined) { %>
+        <ul>
+            <li><%= errorsTwo %></li>
+        </ul>
+    <% } %>
+
+    <form action="/addLecturer" method="POST">
+        <label>Lecturer ID</label><br>
+        <input type="text" name="_id" value="<%= _id %>"><br>  
+        <label>Name</label><br>
+        <input type="text" name="name" value="<%= name %>"><br><br>
+        <label>Dept</label><br>
+        <input type="text" name="dept" value="<%= dept %>"><br><br>
+        <input type="submit" value="Add">
+    </form>
+    <a href="/">Home</a>
+
+</body>
+
+</html>

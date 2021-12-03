@@ -1,0 +1,29 @@
+<html>
+
+<body>
+
+    <h2>Edit Module</h2>
+
+    <!-- This will print errors to screen if errors are detected  -->
+    <% if (errors != undefined) { %>
+        <ul>
+            <% errors.forEach((error)=> { %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+
+    <form action="/updateModule" method="POST">
+        <label>Module</label><br>
+        <input type="text" id="module" name="module" value="<%= mid %>" readonly><br>  <!-- Read only as per edit module requirement  -->
+        <label>Name:</label><br>
+        <input type="text" id="name" name="name" value="<%= moduleName %>"><br><br>
+        <label>Credits:</label><br>
+        <input type="number" id="credits" name="credits" value="<%= moduleCredits %>"><br><br>
+        <input type="submit" value="Add">
+    </form>
+    <a href="/">Home</a>
+
+</body>
+
+</html>

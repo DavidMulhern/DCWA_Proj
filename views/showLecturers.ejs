@@ -1,0 +1,39 @@
+<style>
+    table, th, td
+    {
+        border:1px solid black;
+        
+    }
+    tr:nth-child(even)
+    {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<form action="/addLecturer">
+    <input type="submit" value="Add Lecturer">
+</form>
+
+<table>
+    <tr>
+        <th>Lecturer ID</th>
+        <th>Name</th>
+        <th>Dept</th>
+    </tr>
+    <!-- All appropraite variables passed in to populate the lecturer table -->
+    <% allData.forEach((oneData)=>
+        { %>
+        <tr>
+            <td>
+                <%= oneData._id %>
+            </td>
+            <td>
+                <%= oneData.name %>
+            </td>
+            <td>
+                <%= oneData.dept %>
+            </td>
+        </tr>
+        <% }) %>
+</table>
+<a href="/">Home</a>

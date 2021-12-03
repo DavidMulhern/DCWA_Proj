@@ -1,0 +1,44 @@
+<style>
+    table, th, td
+    {
+        border:1px solid black;
+        
+    }
+    tr:nth-child(even)
+    {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<table>
+    <tr>
+        <th>Module ID</th>
+        <th>Name</th>
+        <th>Credits</th>
+        <th>Update</th>
+        <th>Students</th>
+    </tr>
+    <!-- All appropriate variables passed for the modules and also a links to student enrolled & update-->
+    <% details.forEach((module)=>
+        { %>
+        <tr>
+            <td>
+                <%= module.mid %>
+            </td>
+            <td>
+                <%= module.name %>
+            </td>
+            <td>
+                <%= module.credits %>
+            </td>
+            <td>
+                <a href="/module/edit/<%= module.mid %>">Update</a>
+            </td>
+            <td>
+                <a href="/module/students/<%= module.mid %>">Students</a>
+            </td>
+        </tr>
+        <% }) %>
+</table>
+<a href="/">Home</a>
+

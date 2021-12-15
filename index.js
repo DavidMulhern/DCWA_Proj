@@ -19,7 +19,7 @@ const { body, validationResult, check } = require('express-validator');
 app.set('view engine', 'ejs')
 
 // Homepage - /
-app.get('/', (rer, res)=>{
+app.get('/', (req, res)=>{
     // Returns the html file to display
     res.sendFile(__dirname + "/views/homepage.html")
 })
@@ -144,7 +144,6 @@ app.get('/listLecturers', (req, res)=>{
             res.render("showLecturers", {allData:result})
         })
         .catch((error)=>{
-
         })
 })
 
@@ -173,10 +172,20 @@ app.post('/addLecturer',
                 {
                     var errorString = ("Dept doesn't exist")
                     res.render("addLecturer", {errors:undefined, errorsTwo:errorString, _id:req.body._id, name:req.body.name, dept:req.body.dept })
-                }else{
+                }
+                else{
                     // all checks are passed, adding new lecturer
                     mDAO.addLecturer(req.body)
-                    res.redirect('/listLecturers')
+                    .then(()=>{
+                        res.redirect('/listLecturers')
+                    })
+                    .catch((err)=>{
+                        // Error E11000 is a duplicate key error. This will notify the user and render the screen with message
+                        if(err.message.includes("E11000")){
+                            var errorString = ("_id already exists")
+                            res.render("addLecturer", {errors:undefined, errorsTwo:errorString, _id:req.body._id, name:req.body.name, dept:req.body.dept })
+                        }
+                    })
                 }
             })
             .catch((err)=>{
@@ -189,5 +198,4 @@ app.post('/addLecturer',
 app.listen(3000, ()=>{
     console.log("Listening on port 3000")
 })
-
 // Author: David Mulhern - G00268549
